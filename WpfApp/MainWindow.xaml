@@ -4,60 +4,77 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
+        xmlns:viewModels="clr-namespace:WpfApp.ViewModels"
         mc:Ignorable="d"
-        Title="Caculator" Height="450" Width="350">
-    <Grid>
-        <StackPanel Orientation="Horizontal" Height="40" VerticalAlignment="Top" Background="Aqua">
-            
+        Title="Calculator" Height="450" Width="350">
+    <Window.DataContext>
+        <viewModels:CalculatorViewModel/>
+    </Window.DataContext>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="4">
+            <TextBox x:Name="ExpressionTextBox"
+                     Text="{Binding ExpressionText, Mode=OneWay}"
+                     Margin="0,0,2,0"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Right">
+            </TextBox>
+            <TextBox x:Name="ResultTextBox" 
+                   Text="{Binding ResultText, Mode=OneWay}"
+                   Margin="0,0,2,0"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Right" 
+                   FontSize="30"/>
         </StackPanel>
-        <StackPanel Height="80" Margin="0,40,0,0" VerticalAlignment="Top" Background="Gray">
-            
-        </StackPanel>
-        <Grid Margin="0,120,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="0">%</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="1">CE</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="2">C</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="0" Grid.Column="3">x</Button>
+      
+        <Button x:Name="PercentButton" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="2">%</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="1" Margin="2" Click="CEButton_OnClick">CE</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="2" Margin="2">C</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="3" Margin="2" Click="RemoveButton_OnClick" Content="←">
+            </Button>
 
-            <Button Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="0">1/x</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="1">x2</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="2">2Vx</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="1" Grid.Column="3">/</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="0" Margin="2">1/x</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="1" Margin="2">x2</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="2" Margin="2">2Vx</Button>
+        <Button x:Name="DivideButton" Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="3" Margin="2" Click="OperatorButton_OnClick">/</Button>
 
-            <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0">7</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="1">8</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="2">9</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="3">X</Button>
+        <Button x:Name="SevenButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="0" Margin="2" Click="NumberButtons_OnClick">7</Button>
+        <Button x:Name="EightButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="1" Margin="2" Click="NumberButtons_OnClick">8</Button>
+        <Button x:Name="NineButton"  Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="2" Margin="2" Click="NumberButtons_OnClick">9</Button>
+        <Button x:Name="DoubleButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="3" Margin="2" Click="OperatorButton_OnClick">X</Button>
 
-            <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="0">4</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="1">5</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="2">6</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="3">-</Button>
+        <Button x:Name="FourButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="0" Margin="2" Click="NumberButtons_OnClick">4</Button>
+        <Button x:Name="FiveButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="1" Margin="2" Click="NumberButtons_OnClick">5</Button>
+        <Button x:Name="SixButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="2" Margin="2" Click="NumberButtons_OnClick">6</Button>
+        <Button x:Name="MinusButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="3" Margin="2" Click="OperatorButton_OnClick">-</Button>
 
-            <Button Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="0">1</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="1">2</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="2">3</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="3">+</Button>
+        <Button x:Name="OneButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="0" Margin="2" Click="NumberButtons_OnClick">1</Button>
+        <Button x:Name="TwoButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="1" Margin="2" Click="NumberButtons_OnClick">2</Button>
+        <Button x:Name="ThreeButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="2" Margin="2" Click="NumberButtons_OnClick">3</Button>
+        <Button x:Name="PlusButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="3" Margin="2" Click="OperatorButton_OnClick">+</Button>
 
-            <Button Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="0">+</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="1">1</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="2">1</Button>
-            <Button Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="3">1</Button>
-        </Grid>
-
+        <Button x:Name="NegativeButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="0" Margin="2">+/-</Button>
+        <Button x:Name="ZeroButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="1" Margin="2" Click="NumberButtons_OnClick">0</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="2" Margin="2">.</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="3" Margin="2" Background="Blue" Foreground="White" Click="EqualButton_OnClick">=</Button>
     </Grid>
+
 </Window>
