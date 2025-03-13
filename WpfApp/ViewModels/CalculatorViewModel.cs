@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace WpfApp.ViewModels
 {
-    public class CalculatorViewModel : INotifyPropertyChanged
+    public partial class CalculatorViewModel : ObservableObject
     {
-        private string _resultText = "";
-        private string _expressionText = "";
+        [ObservableProperty]
+        private string resultText = "";
+        [ObservableProperty]
+        private string expressionText = "";
 
         private double _firstOperand;
         private double _secondOperand;
@@ -21,43 +25,14 @@ namespace WpfApp.ViewModels
 
         private bool resetIncomingNumber = false;
 
-        public string ResultText
-        {
-            get => _resultText;
-            set
-            {
-                _resultText = value;
-                OnPropertyChanged(nameof(ResultText));
-            }
-        }
-
-        public string ExpressionText
-        {
-            get => _expressionText;
-            set
-            {
-                _expressionText = value;
-                OnPropertyChanged(nameof(ExpressionText));
-            }
-        }
-
-
-        public ICommand NumberCommand { get; }
-        public ICommand OperatorCommand { get; }
-        public ICommand EqualsCommand { get; }
-        public ICommand ClearCommand { get; }
-        public ICommand DeleteCommand { get; }
 
 
         public CalculatorViewModel()
         {
-            NumberCommand = new RelayCommand(InputOperand);
-            DeleteCommand = new RelayCommand(param => DeleteNumber());
-            ClearCommand = new RelayCommand(param => Clear());
-            OperatorCommand = new RelayCommand(InputOperator);
-            EqualsCommand = new RelayCommand(param => Calculate());
+
         }
 
+        [RelayCommand]
         private void InputOperand(object param)
         {
             double inputNumber = 0;
@@ -86,6 +61,7 @@ namespace WpfApp.ViewModels
             }
         }
 
+        [RelayCommand]
         private void DeleteNumber()
         {
             var newNumber = ResultText.Length > 1 ? ResultText.Remove(ResultText.Length - 1) : "0";
@@ -93,7 +69,7 @@ namespace WpfApp.ViewModels
             ResultText = newNumber;
         }
 
-
+        [RelayCommand]
         private void Clear()
         {
             _firstOperand = 0;
@@ -103,6 +79,7 @@ namespace WpfApp.ViewModels
             _operator = string.Empty;
         }
 
+        [RelayCommand]
         private void InputOperator(object opt)
         {
             _operator = opt.ToString();
@@ -114,6 +91,7 @@ namespace WpfApp.ViewModels
             resetIncomingNumber = true;
         }
 
+        [RelayCommand]
         private void Calculate()
         {
             switch (_operator)

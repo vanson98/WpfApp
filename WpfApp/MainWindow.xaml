@@ -48,32 +48,32 @@
         <Button x:Name="PercentButton" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="2">%</Button>
         <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="1" Margin="2" Command="{Binding ClearCommand}">CE</Button>
         <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="2" Margin="2">C</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="3" Margin="2" Content="←" Command="{Binding DeleteCommand}"></Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="3" Margin="2" Content="←" Command="{Binding DeleteNumberCommand}"></Button>
 
         <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="0" Margin="2">1/x</Button>
         <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="1" Margin="2">x2</Button>
         <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="2" Margin="2">2Vx</Button>
-        <Button x:Name="DivideButton" Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="3" Margin="2" Command="{Binding OperatorCommand}" CommandParameter="/">/</Button>
+        <Button x:Name="DivideButton" Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="/">/</Button>
 
-        <Button x:Name="SevenButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="0" Margin="2" Command="{Binding NumberCommand}" CommandParameter="7">7</Button>
-        <Button x:Name="EightButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="1" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="8">8</Button>
-        <Button x:Name="NineButton"  Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="2" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="9">9</Button>
-        <Button x:Name="DoubleButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="3" Margin="2" Command="{Binding OperatorCommand}" CommandParameter="*">X</Button>
+        <Button x:Name="SevenButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}" CommandParameter="7">7</Button>
+        <Button x:Name="EightButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="8">8</Button>
+        <Button x:Name="NineButton"  Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="9">9</Button>
+        <Button x:Name="DoubleButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="*">X</Button>
 
-        <Button x:Name="FourButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="0" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="4">4</Button>
-        <Button x:Name="FiveButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="1" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="5">5</Button>
-        <Button x:Name="SixButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="2" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="6">6</Button>
-        <Button x:Name="MinusButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="3" Margin="2" Command="{Binding OperatorCommand}" CommandParameter="-">-</Button>
+        <Button x:Name="FourButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="4">4</Button>
+        <Button x:Name="FiveButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="5">5</Button>
+        <Button x:Name="SixButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="6">6</Button>
+        <Button x:Name="MinusButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="-">-</Button>
 
-        <Button x:Name="OneButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="0" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="1">1</Button>
-        <Button x:Name="TwoButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="1" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="2">2</Button>
-        <Button x:Name="ThreeButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="2" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="3">3</Button>
-        <Button x:Name="PlusButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="3" Margin="2" Command="{Binding OperatorCommand}" CommandParameter="+">+</Button>
+        <Button x:Name="OneButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="1">1</Button>
+        <Button x:Name="TwoButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="2">2</Button>
+        <Button x:Name="ThreeButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="3">3</Button>
+        <Button x:Name="PlusButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="+">+</Button>
 
         <Button x:Name="NegativeButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="0" Margin="2">+/-</Button>
-        <Button x:Name="ZeroButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="1" Margin="2" Command="{Binding NumberCommand}"  CommandParameter="0">0</Button>
+        <Button x:Name="ZeroButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="0">0</Button>
         <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="2" Margin="2">.</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="3" Margin="2" Background="Blue" Foreground="White" Command="{Binding EqualsCommand}">=</Button>
+        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="3" Margin="2" Background="Blue" Foreground="White" Command="{Binding CalculateCommand}">=</Button>
     </Grid>
 
 </Window>
