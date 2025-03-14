@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LoginForm"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Title="MainWindow" Height="500" Width="800">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -37,7 +38,9 @@
                                Opacity="0.8" Margin="10 30"/>
                     <Button Content="Sign Up"
                             Style="{StaticResource button}"
+                            Click="SignUpBtn_Click"
                             />
+                    
                 </StackPanel>
             </Grid>
         </Border>

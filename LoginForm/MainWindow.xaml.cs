@@ -81,4 +81,10 @@ public partial class MainWindow : Window
             MessageBox.Show("Successfully Signed In");
         }
     }
+
+    private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+    {
+        PhotosWindow viewer = new PhotosWindow();
+        viewer.Show();
+    }
 }
