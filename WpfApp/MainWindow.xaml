@@ -6,72 +6,204 @@
         xmlns:local="clr-namespace:WpfApp"
         xmlns:viewModels="clr-namespace:WpfApp.ViewModels"
         mc:Ignorable="d"
-        Title="Calculator" Height="450" Width="350">
-  
+        Title="Calculator" Height="550" Width="375">
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Window.Resources>
+        <Style x:Key="numberButton" TargetType="Button">
+            <Setter Property="Background" Value="#fbfcfd"/>
+            <Setter Property="Foreground" Value="#292a2a"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="#D4D5D5" BorderThickness="1" CornerRadius="5">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="operatorButton" TargetType="Button">
+            <Setter Property="Background" Value="#fbfcfd"/>
+            <Setter Property="Foreground" Value="#464A49"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="#D4D5D5" BorderThickness="1" CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEEEEE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="equalButton" TargetType="Button">
+            <Setter Property="Background" Value="#0987C6"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="#D4D5D5" BorderThickness="1" CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#1FA0E0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="functionButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#464A49"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Template">
+                <Setter.Value >
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEEEEE"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="featureButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Margin" Value="8 2"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="0" 
-                    Grid.ColumnSpan="4">
-            <Label x:Name="ExpressionLabel"
-                     Content="{Binding ExpressionText, Mode=OneWay}"
-                     Margin="0,0,2,0"
-                     VerticalAlignment="Top"
-                     HorizontalAlignment="Right">
-            </Label>
-            <Label x:Name="ResultLabel" 
+        <DockPanel Grid.Row="0" LastChildFill="True" Margin="0 10 0 0">
+            <Button Style="{StaticResource featureButton}" DockPanel.Dock="Left">
+                <Image Source="/Images/menu.png" Width="20" Height="20"/>
+            </Button>
+            <Label DockPanel.Dock="Left" Content="Standard" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold"></Label>
+            <Button Style="{StaticResource featureButton}" DockPanel.Dock="Left">
+                <Image Source="/Images/corner.png"/>
+            </Button>
+            <Button Style="{StaticResource featureButton}" HorizontalAlignment="Right">
+                <Image Source="/Images/history.png"/>
+            </Button>
+        </DockPanel>
+        <Label Grid.Row="1" x:Name="ExpressionLabel"
+                 Content="{Binding ExpressionText, Mode=OneWay}"
+                   Margin="0,0,2,0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"/>
+        <Label Grid.Row="2" x:Name="ResultLabel" 
                    Content="{Binding ResultText, Mode=OneWay}"
                    Margin="0,0,2,0"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Right" 
                    FontSize="30"/>
-        </StackPanel>
-      
-        <Button x:Name="PercentButton" Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="0" Margin="2">%</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="1" Margin="2" Command="{Binding ClearCommand}">CE</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="2" Margin="2">C</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="2" Grid.Column="3" Margin="2" Content="←" Command="{Binding DeleteNumberCommand}"></Button>
+        
+        <UniformGrid Grid.Row="3" Rows="1" Columns="6">
+            <Button Style="{StaticResource functionButton}" Content="MC" Width="Auto"/>
+            <Button Style="{StaticResource functionButton}" Content="MR" Width="Auto"/>
+            <Button Style="{StaticResource functionButton}" Content="M+" Width="Auto"/>
+            <Button Style="{StaticResource functionButton}" Content="M-" Width="Auto"/>
+            <Button Style="{StaticResource functionButton}" Content="MS" Width="Auto"/>
+            <Button Style="{StaticResource functionButton}" Content="Mv" Width="Auto"/> 
+        </UniformGrid>
 
-        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="0" Margin="2">1/x</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="1" Margin="2">x2</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="2" Margin="2">2Vx</Button>
-        <Button x:Name="DivideButton" Width="Auto" Height="Auto" Grid.Row="3" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="/">/</Button>
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="SevenButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}" CommandParameter="7">7</Button>
-        <Button x:Name="EightButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="8">8</Button>
-        <Button x:Name="NineButton"  Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="9">9</Button>
-        <Button x:Name="DoubleButton" Width="Auto" Height="Auto" Grid.Row="4" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="*">X</Button>
 
-        <Button x:Name="FourButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="4">4</Button>
-        <Button x:Name="FiveButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="5">5</Button>
-        <Button x:Name="SixButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="6">6</Button>
-        <Button x:Name="MinusButton" Width="Auto" Height="Auto" Grid.Row="5" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="-">-</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="0" Grid.Column="0" >%</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="0" Grid.Column="1"  Command="{Binding ClearCommand}">CE</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="0" Grid.Column="2" >C</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="0" Grid.Column="3"  Content="←" Command="{Binding DeleteNumberCommand}"></Button>
 
-        <Button x:Name="OneButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="0" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="1">1</Button>
-        <Button x:Name="TwoButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="2">2</Button>
-        <Button x:Name="ThreeButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="2" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="3">3</Button>
-        <Button x:Name="PlusButton" Width="Auto" Height="Auto" Grid.Row="6" Grid.Column="3" Margin="2" Command="{Binding InputOperatorCommand}" CommandParameter="+">+</Button>
+            <Button Style="{StaticResource operatorButton}" Grid.Row="1" Grid.Column="0" >1/x</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="1" Grid.Column="1" >x2</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="1" Grid.Column="2" >2Vx</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="1" Grid.Column="3"  Command="{Binding InputOperatorCommand}" CommandParameter="/">/</Button>
 
-        <Button x:Name="NegativeButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="0" Margin="2">+/-</Button>
-        <Button x:Name="ZeroButton" Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="1" Margin="2" Command="{Binding InputOperandCommand}"  CommandParameter="0">0</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="2" Margin="2">.</Button>
-        <Button Width="Auto" Height="Auto" Grid.Row="7" Grid.Column="3" Margin="2" Background="Blue" Foreground="White" Command="{Binding CalculateCommand}">=</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="2" Grid.Column="0"  Command="{Binding InputOperandCommand}" CommandParameter="7">7</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="2" Grid.Column="1"  Command="{Binding InputOperandCommand}"  CommandParameter="8">8</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="2" Grid.Column="2"  Command="{Binding InputOperandCommand}"  CommandParameter="9">9</Button>
+            <Button Style="{StaticResource operatorButton}" Grid.Row="2" Grid.Column="3"  Command="{Binding InputOperatorCommand}" CommandParameter="*">X</Button>
+
+            <Button Style="{StaticResource numberButton}" Grid.Row="3" Grid.Column="0"  Command="{Binding InputOperandCommand}"  CommandParameter="4">4</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="3" Grid.Column="1"  Command="{Binding InputOperandCommand}"  CommandParameter="5">5</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="3" Grid.Column="2"  Command="{Binding InputOperandCommand}"  CommandParameter="6">6</Button>
+            <Button Style="{StaticResource operatorButton}" Grid.Row="3" Grid.Column="3"  Command="{Binding InputOperatorCommand}" CommandParameter="-">-</Button>
+
+            <Button Style="{StaticResource numberButton}" Grid.Row="4" Grid.Column="0"  Command="{Binding InputOperandCommand}"  CommandParameter="1">1</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="4" Grid.Column="1"  Command="{Binding InputOperandCommand}"  CommandParameter="2">2</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="4" Grid.Column="2"  Command="{Binding InputOperandCommand}"  CommandParameter="3">3</Button>
+            <Button  Style="{StaticResource operatorButton}" Grid.Row="4" Grid.Column="3"  Command="{Binding InputOperatorCommand}" CommandParameter="+">+</Button>
+
+            <Button Style="{StaticResource numberButton}" Grid.Row="5" Grid.Column="0" >+/-</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="5" Grid.Column="1"  Command="{Binding InputOperandCommand}"  CommandParameter="0">0</Button>
+            <Button Style="{StaticResource numberButton}" Grid.Row="5" Grid.Column="2" >.</Button>
+            <Button Style="{StaticResource equalButton}" Grid.Row="5" Grid.Column="3" Command="{Binding CalculateCommand}">=</Button>
+        </Grid>
+
     </Grid>
 
 </Window>
