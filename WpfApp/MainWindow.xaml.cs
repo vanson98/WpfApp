@@ -18,12 +18,7 @@ namespace WpfApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private double firstOperand;
-    private double secondOperand;
    
-    private double? result = null;
-    private string lastOperator;
-
     public MainWindow()
     {
         InitializeComponent();

@@ -15,17 +15,15 @@ namespace WpfApp.ViewModels
     public partial class CalculatorViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string resultText = "";
+        private string _resultText = "";
         [ObservableProperty]
-        private string expressionText = "";
+        private string _expressionText = "";
 
         private double _firstOperand;
         private double _secondOperand;
-        private string _operator;
+        private string? _operator;
 
-        private bool resetIncomingNumber = false;
-
-
+        private bool resetIncomingNumber;
 
         public CalculatorViewModel()
         {
@@ -37,28 +35,25 @@ namespace WpfApp.ViewModels
         {
             double inputNumber = 0;
             // convert param to input number
-            if (param == null || !double.TryParse(param.ToString(), out inputNumber))
+            if (!double.TryParse(param.ToString(), out inputNumber))
             {
                 return;
             }
-
+            var newNumber = _firstOperand == 0 ? $"{inputNumber}" : $"{_firstOperand}{inputNumber}";
             if (string.IsNullOrEmpty(_operator))
             {
-                var newNumber = _firstOperand == 0 ? $"{inputNumber}" : $"{_firstOperand}{inputNumber}";
                 _firstOperand = double.Parse(newNumber);
                 ResultText = $"{newNumber}";
+                return;
             }
-            else
+            if (resetIncomingNumber)
             {
-                if (resetIncomingNumber)
-                {
-                    resetIncomingNumber = false;
-                    _secondOperand = 0;
-                }
-                var newNumber = _secondOperand == 0 ? $"{inputNumber}" : $"{_secondOperand}{inputNumber}";
-                _secondOperand = double.Parse(newNumber);
-                ResultText = $"{newNumber}";
+                resetIncomingNumber = false;
+                _secondOperand = 0;
             }
+            newNumber = _secondOperand == 0 ? $"{inputNumber}" : $"{_secondOperand}{inputNumber}";
+            _secondOperand = double.Parse(newNumber);
+            ResultText = $"{newNumber}";
         }
 
         [RelayCommand]
@@ -127,14 +122,5 @@ namespace WpfApp.ViewModels
                     break;
             }
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
-
-
 }
