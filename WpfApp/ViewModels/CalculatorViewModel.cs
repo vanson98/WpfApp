@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows.Media.Animation;
 
 namespace WpfApp.ViewModels
 {
@@ -18,6 +19,8 @@ namespace WpfApp.ViewModels
         private string _resultText = "";
         [ObservableProperty]
         private string _expressionText = "";
+        [ObservableProperty]
+        public Visibility _historyBoardVisibility = Visibility.Hidden;
 
         private double _firstOperand;
         private double _secondOperand;
@@ -121,6 +124,18 @@ namespace WpfApp.ViewModels
                     _firstOperand = result;
                     break;
             }
+        }
+
+        [RelayCommand]
+        private void ShowHistoryBoard()
+        {
+            HistoryBoardVisibility = Visibility.Visible;
+        }
+
+        [RelayCommand]
+        private void HideHistoryBoard()
+        {
+            HistoryBoardVisibility = Visibility.Collapsed;
         }
     }
 }
