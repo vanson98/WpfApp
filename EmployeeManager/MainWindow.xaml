@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmployeeManager"
+        xmlns:views="clr-namespace:EmployeeManager.Views"
         mc:Ignorable="d"
-        Width="1080" Height="720" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent">
+        Width="1080" Height="720" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <Style TargetType="Control"></Style>
+    </Window.Resources>
     <Border>
         <Border.Background>
-            <ImageBrush ImageSource="/Images/window-bg-image.png" Opacity="0.2" />
+            <ImageBrush ImageSource="/Images/window-bg-image.png" Opacity="1" />
         </Border.Background>
         <Grid>
             <Grid Margin="20">
@@ -24,20 +28,7 @@
                         <Border Width="50" Height="50" CornerRadius="25" Background="#fff" />
                     </StackPanel>
                 </DockPanel>
-                <Border Grid.Row="1" Background="White" Margin="0" CornerRadius="10">
-                    <StackPanel Margin="10">
-                        <DockPanel Height="100" LastChildFill="True">
-                            <ComboBox Text="Role" Width="100" Height="50"></ComboBox>
-                            <ComboBox Text="Role" Width="100" Height="50"></ComboBox>
-                            <TextBox Width="250" Height="50"></TextBox>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Width="100" Height="50" HorizontalAlignment="Right" Margin="0 0 20 0 " Content="Export"></Button>
-                                <Button Width="120" Height="50" HorizontalAlignment="Right" Content="Them nhan vien"></Button>
-                            </StackPanel>
-                        </DockPanel>
-                        <Grid></Grid>
-                    </StackPanel>
-                </Border>
+                <views:EmployeeList Grid.Row="1"/>
             </Grid>
             
         </Grid>

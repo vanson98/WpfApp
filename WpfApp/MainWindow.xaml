@@ -134,10 +134,6 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="42*"/>
-            <RowDefinition Height="47*"/>
-        </Grid.RowDefinitions>
         <Grid Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="48" />
@@ -430,22 +426,18 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid Visibility="{Binding HistoryBoardVisibility, FallbackValue=Hidden}" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="1.6*" />
-            </Grid.RowDefinitions>
+        <Grid x:Name="BoardContainer" Visibility="{Binding  HistoryBoardVisibility, Mode= TwoWay}" Grid.RowSpan="2">
             <Border
-                Grid.Row="0"
-                Grid.RowSpan="2"
                 Background="Gray"
-                MouseLeftButtonDown="BoardMask_MouseLeftButtonDown"
+                PreviewMouseDown="BoardMask_MouseLeftButtonDown"
                 Opacity="0.5">
                 <Border.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding HideHistoryBoardCommand}"/>
                 </Border.InputBindings>
             </Border>
-            <components:HistoryBoard Grid.Row="1" x:Name="historyBoard"/>
+            <components:HistoryBoard x:Name="HistoryBoard" Items="{Binding ExpressionHistories}"
+                                     DataContext="{Binding}"
+                                     SelectedEpx="{Binding SelectedExpression, Mode=TwoWay}"/>
         </Grid>
     </Grid>
 </Window>

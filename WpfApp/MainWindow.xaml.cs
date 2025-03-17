@@ -25,20 +25,21 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new CalculatorViewModel();
-        historyBoard.BoardInstance.Height = 0;
+        HistoryBoard.BoardInstance.Height = 0;
     }
 
     private void OpenHistoryButton_Click(object sender, RoutedEventArgs e)
     {
-        //DoubleAnimation heighAnimation = new DoubleAnimation(350, new Duration(TimeSpan.FromSeconds(1)));
-        //historyBoard.BoardInstance.BeginAnimation(HeightProperty, heighAnimation);
-        //historyBoard.BoardInstance.Height = 100;
+        BoardContainer.Visibility = Visibility.Visible;
+        DoubleAnimation heighAnimation = new DoubleAnimation(350, new Duration(TimeSpan.FromMilliseconds(300)));
+        HistoryBoard.BoardInstance.BeginAnimation(HeightProperty, heighAnimation);
     }
 
     private void BoardMask_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        DoubleAnimation heighAnimation = new DoubleAnimation(0, new Duration(TimeSpan.FromSeconds(1)));
-        historyBoard.BoardInstance.BeginAnimation(HeightProperty, heighAnimation);
+        DoubleAnimation heighAnimation = new DoubleAnimation(0, new Duration(TimeSpan.FromMilliseconds(300)));
+        HistoryBoard.BoardInstance.BeginAnimation(HeightProperty, heighAnimation);
+        BoardContainer.Visibility = Visibility.Collapsed;
     }
 
 }

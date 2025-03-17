@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfApp.Components"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  
+    x:Name="rootBoard"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="boardLayout" TargetType="ContentControl">
@@ -24,10 +24,41 @@
     </UserControl.Resources>
 
     <ContentControl
-        x:Name="historyBoard"
+        MinWidth="300"
         Height="350"
-        Width="375"
+        x:Name="board"
+        VerticalAlignment="Bottom"
         Style="{StaticResource boardLayout}">
-        <Label Content="No history" />
+        <StackPanel Height="Auto">
+            <ListBox 
+                ItemsSource="{Binding Items, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                Width="Auto" 
+                VerticalAlignment="Bottom"
+                Margin="10"
+                SelectedItem="{Binding SelectedEpx, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Width="320">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding FirstOperand}" FontSize="15"/>
+                                    <TextBlock Text="{Binding Operator}" FontSize="15" Margin="10 0"/>
+                                    <TextBlock Text="{Binding SecondOperand}" FontSize="15" Margin="10 0"/>
+                                    <TextBlock Text="=" FontSize="15"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Result}" HorizontalAlignment="Right" FontSize="20" FontWeight="DemiBold"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <Border Height="Auto">
+                            <ItemsPresenter></ItemsPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </ListBox.Template>
+            </ListBox>
+       
+        </StackPanel>
+       
     </ContentControl>
 </UserControl>
